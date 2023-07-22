@@ -1,0 +1,31 @@
+jwt:
+  token:
+    secret: HELLO.WORLD
+    subject: email
+    issuer: danekerscode
+cloud:
+  aws:
+    bucket:
+      name: fs-danekerscode
+      key: foo
+    region:
+      static: us-east-1
+    stack:
+      auto: false
+    credentials:
+      access-key: AKIAUACVH7EQTQEHWFIL
+      secret-key: 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
+spring:
+  datasource:
+    password: postgres
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/fs
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+
+kafka:
+  greeting:
+    prefix: http://localhost:8080/api/v1/user
