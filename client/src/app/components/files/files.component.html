@@ -1,0 +1,31 @@
+<app-sidenav></app-sidenav>
+<div class="item-list">
+  <button (click)="openUploadFileModal()" id="upload_file">Upload file</button>
+  <ul>
+    <li>
+      <span>Item 1</span>
+      <button class="download-btn">Download</button>
+    </li>
+    <li>
+      <span>Item 2</span>
+      <button class="download-btn">Download</button>
+    </li>
+    <li>
+      <span>Item 3</span>
+      <button class="download-btn">Download</button>
+    </li>
+  </ul>
+</div>
+<div id="popup" class="popup">
+  <div class="popup-content">
+    <span class="close" id="closePopup">&times;</span>
+    <form (submit)="uploadFile()" >
+      <label for="images" class="drop-container" id="dropcontainer">
+      <span class="drop-title">Drop files here</span>
+      or
+      <input type="file" id="images" accept="image/*" required (change)="onFileInputChange($event)">
+    </label>
+     <button>Upload file</button>
+    </form>
+  </div>
+</div>

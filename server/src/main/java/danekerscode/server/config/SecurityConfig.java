@@ -23,20 +23,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] API_DOCS_WHITELIST = {
 
-            // for Swagger UI v2
-            "/v2/api-docs",
-            "/swagger-ui.html",
-            "/swagger-resources",
-            "/swagger-resources/**",
-            "/configuration/ui",
-            "/configuration/security",
-            "/webjars/**",
-
             // for Swagger UI v3 (OpenAPI)
             "/v3/api-docs/**",
             "/swagger-ui/**",
 
-            "/auth/**"
+
     };
 
     @Bean
@@ -64,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(API_DOCS_WHITELIST).permitAll()
                 .antMatchers("/api/v1/user/**").permitAll()
+                .antMatchers("/auth/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

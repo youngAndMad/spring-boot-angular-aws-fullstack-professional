@@ -9,6 +9,7 @@ import danekerscode.server.utils.TokenType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.function.BiFunction;
 import java.util.function.Function;
@@ -50,12 +51,13 @@ public class JwtService {
             String email,
             TokenType token
     ) {
+        var date = Date.from(ZonedDateTime.now().plusMinutes(token.getExpiration()).toInstant());
         return JWT.create()
                 .withClaim("email", email)
                 .withSubject(subject)
                 .withIssuer(issuer)
                 .withIssuedAt(new Date())
-                .withExpiresAt(new Date(System.currentTimeMillis() + getIssuedTime.apply(token)))
+                .withExpiresAt(date)
                 .sign(getAlgorithm.apply(token,SECRET));
     }
 
@@ -64,10 +66,5 @@ public class JwtService {
             type == ACCESS ? Algorithm.HMAC256(SECRET) :
                     type == REFRESH ? Algorithm.HMAC512(SECRET)
                     : Algorithm.HMAC384(SECRET);
-
-    private final Function<TokenType,Integer> getIssuedTime = token ->
-            token == ACCESS ? ACCESS_TOKEN_EXPIRATION :
-                    token == REFRESH ? REFRESH_TOKEN_EXPIRATION :
-                            VERIFICATION_TOKEN_EXPIRATION;
 
 }

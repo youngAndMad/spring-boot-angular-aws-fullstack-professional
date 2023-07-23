@@ -46,13 +46,14 @@ export class AuthComponent implements OnInit {
   register() {
     this.userService.register(this.registrationForm.value).subscribe(response => {
       if (response === true) {
+        document.getElementById('popup')!.style.display = 'block';
       }
     })
-    document.getElementById('popup')!.style.display = 'block';
+
   }
 
   ngOnInit(): void {
-    document.getElementById('closePopup')!.addEventListener('click',  () => {
+    document.getElementById('closePopup')!.addEventListener('click', () => {
       document.getElementById('popup')!.style.display = 'none';
     });
   }

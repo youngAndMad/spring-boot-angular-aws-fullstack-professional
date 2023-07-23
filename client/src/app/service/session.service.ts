@@ -9,24 +9,24 @@ export class SessionService {
   get(
     value: any
   ) {
-    return sessionStorage.getItem(value)
+    return localStorage.getItem(value)
   }
 
   updateTokens(
     tokens: TokenResponse
   ) {
-    sessionStorage.setItem('refresh_token' , tokens.refresh_token)
-    sessionStorage.setItem('access_token' , tokens.access_token)
+    localStorage.setItem('refresh_token' , tokens.refresh_token)
+    localStorage.setItem('access_token' , tokens.access_token)
   }
 
   delete(
     value:any
   ){
-    sessionStorage.removeItem(`${value}`)
+    localStorage.removeItem(`${value}`)
   }
 
   logout(){
-    sessionStorage.clear();
+    localStorage.clear();
   }
 
 }

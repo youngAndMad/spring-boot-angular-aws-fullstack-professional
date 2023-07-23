@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AmazonFile extends DateAudit {
+public class AmazonFile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

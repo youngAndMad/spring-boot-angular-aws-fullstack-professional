@@ -5,12 +5,14 @@ import {VerificationComponent} from "./components/verification/verification.comp
 import {ProfileComponent} from "./components/profile/profile.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
 import {HomeComponent} from "./components/home/home.component";
+import {FilesComponent} from "./components/files/files.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: AuthComponent},
   {path: 'verification', component: VerificationComponent},
   {path: 'profile', component: ProfileComponent},
+  {path: 'files', component:FilesComponent},
   {path: '**', component: NotFoundComponent},
 ];
 
@@ -19,4 +21,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
+
 }
