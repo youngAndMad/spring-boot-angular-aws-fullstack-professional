@@ -4,8 +4,10 @@ import {AuthComponent} from "./components/auth/auth.component";
 import {VerificationComponent} from "./components/verification/verification.component";
 import {ProfileComponent} from "./components/profile/profile.component";
 import {NotFoundComponent} from "./components/not-found/not-found.component";
+import {HomeComponent} from "./components/home/home.component";
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'login', component: AuthComponent},
   {path: 'verification', component: VerificationComponent},
   {path: 'profile', component: ProfileComponent},

@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.sidebar {
+  width: 200px;
+  height: 100%;
+  background-color: #f0f0f0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: #333;
+  display: block;
+}
+
+/* Adjust the margin-top for the bottom option */
+.bottom-option {
+  margin-top: auto;
+}

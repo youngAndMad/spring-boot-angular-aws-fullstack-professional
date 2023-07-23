@@ -9,6 +9,9 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { VerificationComponent } from './components/verification/verification.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HomeComponent } from './components/home/home.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,16 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AuthComponent,
     VerificationComponent,
     ProfileComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    HomeComponent,    SidenavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]
