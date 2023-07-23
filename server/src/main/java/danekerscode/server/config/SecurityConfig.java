@@ -5,6 +5,7 @@ import danekerscode.server.service.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -20,6 +21,23 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final CustomUserDetailsService customUserDetailsService;
     private final JwtFilter jwtFilter;
 
+    private static final String[] API_DOCS_WHITELIST = {
+
+            // for Swagger UI v2
+            "/v2/api-docs",
+            "/swagger-ui.html",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/configuration/ui",
+            "/configuration/security",
+            "/webjars/**",
+
+            // for Swagger UI v3 (OpenAPI)
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+
+            "/auth/**"
+    };
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -44,7 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors().and().csrf()
                 .disable()
                 .authorizeRequests()
-                .antMatchers("/auth/**", "/user/register").permitAll()
+                .antMatchers(API_DOCS_WHITELIST).permitAll()
+                .antMatchers("/api/v1/user/**").permitAll()
                 .anyRequest().authenticated();
 
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

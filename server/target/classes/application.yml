@@ -25,3 +25,7 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: create-drop
+
+kafka:
+  greeting:
+    prefix: http://localhost:8080/api/v1/user
