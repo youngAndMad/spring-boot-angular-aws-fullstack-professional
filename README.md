@@ -27,10 +27,20 @@ create database fs
 
 **3. Change PostreSQL username and password as per your installation**
 
-+ open `src/main/resources/application.yml`
-+ change `spring.datasource.username` and `spring.datasource.password` as per your PostgreSQL installation
++ open `server/src/main/resources/application.yml`
++ change `spring.datasource.username` & `spring.datasource.password` as per your PostgreSQL installation
 
-**4. Run the app using maven**
+**4. Get credentials from Google App for mail sending
+
++ open `mail-sender/src/main/resources/application.yml`
++ change `username` & `password` as per your Google App settings
+
+**5. Get credentials from AWS for S3 bucket and update server/a
+
++ open `server/src/main/resources/application.yml`
++ change `clowd.aws.credentials.secret-key` & `clowd.aws.credentials.access-key` & `clowd.aws.bucket.name` as per your Google App settings
+
+**6. Run the app using maven**
 
 ```bash
 mvn spring-boot:run
