@@ -4,14 +4,19 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
-import com.amazonaws.util.IOUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Objects;
 
 @Service
@@ -27,10 +32,9 @@ public class S3Service {
     private final AmazonFileService amazonFileService;
 
 
-
-    public Boolean uploadFile(MultipartFile file, Integer id , String fileName) {
+    public Boolean uploadFile(MultipartFile file, Integer id, String fileName) {
         var user = userService.getUser(id);
-        amazonFileService.save(user,fileName);
+        amazonFileService.save(user, fileName);
         var fileToUpload = convertMultiPartFileToFile(file);
         s3.putObject(new PutObjectRequest(bucketName, fileName, fileToUpload));
         fileToUpload.delete();
@@ -38,18 +42,21 @@ public class S3Service {
     }
 
 
-    public byte[] downloadFile(String fileName) {
-        S3Object s3Object = s3.getObject(bucketName, fileName);
-        S3ObjectInputStream inputStream = s3Object.getObjectContent();
-        try {
-            return IOUtils.toByteArray(inputStream);
-        } catch (IOException e) {
-            e.printStackTrace();
+    @SneakyThrows
+    public Object downloadFile(String fileName) {
+        S3Object object = s3.getObject(bucketName, fileName);
+        S3ObjectInputStream s3is = object.getObjectContent();
+        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+        byte[] read_buf = new byte[1024];
+        int read_len;
+        while ((read_len = s3is.read(read_buf)) > 0) {
+            fileOutputStream.write(read_buf, 0, read_len);
         }
-        return new byte[] {};
+        Path pathObject = Paths.get(fileName);
+        return new UrlResource(pathObject.toUri());
     }
 
-    public Boolean deleteFile(String fileName,Integer id) {
+    public Boolean deleteFile(String fileName, Integer id) {
         s3.deleteObject(bucketName, fileName);
         amazonFileService.deleteById(id);
         return Boolean.TRUE;

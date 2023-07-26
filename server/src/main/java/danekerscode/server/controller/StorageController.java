@@ -4,6 +4,7 @@ package danekerscode.server.controller;
 import danekerscode.server.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,13 +21,8 @@ public class StorageController {
     ResponseEntity<?> getImage(
             @PathVariable String fileName
     ) {
-        byte[] content = this.service.downloadFile(fileName);
-        return ResponseEntity
-                .ok()
-                .contentLength(content.length)
-                .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .header("Content-disposition", "attachment; filename=\"" + fileName + "\"")
-                .body(new ByteArrayResource(content));
+        var file = service.downloadFile(fileName);
+        return ResponseEntity.ok().header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"").body(file);
     }
 
     @PostMapping("/save")

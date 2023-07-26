@@ -11,7 +11,7 @@
 <div id="popup" class="popup">
   <div class="popup-content">
     <span class="close" id="closePopup">&times;</span>
-    <form (submit)="uploadFile()" >
+    <form (submit)="uploadFile()" enctype="multipart/form-data">
       <label for="images" class="drop-container" id="dropcontainer">
       <span class="drop-title">Drop files here</span>
       or

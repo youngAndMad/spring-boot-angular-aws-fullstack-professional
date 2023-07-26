@@ -6,7 +6,7 @@ import {API} from "../utils/config";
 @Injectable({
   providedIn: 'root',
 })
-export class FileService  {
+export class FileService {
 
   constructor(
     private http: HttpClient
@@ -32,7 +32,11 @@ export class FileService  {
   downloadDile(
     fileName: string
   ): Observable<any> {
-    return this.http.get(`${API}/storage/download/${fileName}`)
+    return this.http.get(`${API}/storage/download/${fileName}`,
+      {
+        responseType: 'blob'
+      }
+    )
   }
 
 
