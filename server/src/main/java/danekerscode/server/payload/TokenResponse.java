@@ -7,7 +7,6 @@ import java.time.LocalDateTime;
 
 @Builder
 public record TokenResponse(
-        LocalDateTime givenAt,
         @JsonProperty("access_token")
         String accessToken,
         @JsonProperty("access_token_expiration")

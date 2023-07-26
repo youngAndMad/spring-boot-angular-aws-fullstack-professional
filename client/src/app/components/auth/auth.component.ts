@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../../service/auth.service";
 import {UserService} from "../../service/user.service";
+import {TokenResponse} from "../../utils/TokenResponse";
+import {SessionService} from "../../service/session.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-auth',
@@ -15,7 +18,10 @@ export class AuthComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService:AuthService,
+    private sessionService:SessionService,
+    private router:Router
   ) {
     this.loginForm = fb.group({
       email: [''],
@@ -40,7 +46,13 @@ export class AuthComponent implements OnInit {
   }
 
   login() {
-    console.log(this.loginForm)
+   this.authService.authenticate(this.loginForm.value)
+     .subscribe(response => {
+       if (response !== null){
+         this.sessionService.updateTokens(response)
+         this.router.navigate(['/profile'])
+       }
+     })
   }
 
   register() {

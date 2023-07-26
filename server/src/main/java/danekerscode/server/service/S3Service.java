@@ -29,36 +29,24 @@ public class S3Service {
 
 
     public Boolean uploadFile(MultipartFile file, Integer id , String fileName) {
-
         var user = userService.getUser(id);
         amazonFileService.save(user,fileName);
-//        userService.update(user);
-
-
         var fileToUpload = convertMultiPartFileToFile(file);
         s3.putObject(new PutObjectRequest(bucketName, fileName, fileToUpload));
-
         fileToUpload.delete();
-
         return Boolean.TRUE;
-
     }
 
 
     public byte[] downloadFile(String fileName) {
         S3Object s3Object = s3.getObject(bucketName, fileName);
-
         S3ObjectInputStream inputStream = s3Object.getObjectContent();
-
         try {
             return IOUtils.toByteArray(inputStream);
-
         } catch (IOException e) {
             e.printStackTrace();
-
         }
-        return new byte[]{};
-
+        return new byte[] {};
     }
 
     public Boolean deleteFile(String fileName,Integer id) {

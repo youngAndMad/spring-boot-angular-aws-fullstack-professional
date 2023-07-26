@@ -51,7 +51,6 @@ public class AuthService {
 
     public TokenResponse createResponse(String email) {
         return TokenResponse.builder()
-                .givenAt(LocalDateTime.now())
                 .accessTokenExpiration(ACCESS_TOKEN_EXPIRATION)
                 .refreshTokenExpiration(REFRESH_TOKEN_EXPIRATION)
                 .accessToken(jwtService.generateToken(email, TokenType.ACCESS))

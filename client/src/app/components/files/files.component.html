@@ -1,18 +1,10 @@
 <app-sidenav></app-sidenav>
 <div class="item-list">
-  <button (click)="openUploadFileModal()" id="upload_file">Upload file</button>
-  <ul>
-    <li>
-      <span>Item 1</span>
-      <button class="download-btn">Download</button>
-    </li>
-    <li>
-      <span>Item 2</span>
-      <button class="download-btn">Download</button>
-    </li>
-    <li>
-      <span>Item 3</span>
-      <button class="download-btn">Download</button>
+  <button (click)="openUploadFileModal()" class="upload-file">Upload file</button>
+  <ul class="file_list">
+    <li *ngFor="let amazonFile of user.files;let i = index;">
+      <span>{{(i+1)+'. '}}{{amazonFile.name}}</span>
+      <button class="download-btn" (click)="downloadFile(amazonFile)">Download</button>
     </li>
   </ul>
 </div>
@@ -25,7 +17,8 @@
       or
       <input type="file" id="images" accept="image/*" required (change)="onFileInputChange($event)">
     </label>
-     <button>Upload file</button>
+     <button class="upload-file">Upload file</button>
     </form>
   </div>
 </div>
+

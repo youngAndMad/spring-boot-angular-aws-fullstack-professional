@@ -40,13 +40,7 @@ export class UserService {
   findById(
     id: number
   ): Observable<any> {
-    return this.http.get(`${API}/user/find`,
-      {
-        params: {
-          'id': id
-        }
-      }
-    )
+    return this.http.get(`${API}/user/find?id=`+id)
   }
 
   deleteById(

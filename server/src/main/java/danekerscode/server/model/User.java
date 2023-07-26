@@ -1,6 +1,8 @@
 package danekerscode.server.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import danekerscode.server.model.audit.DateAudit;
 import danekerscode.server.utils.Gender;
 import lombok.*;
@@ -19,6 +21,9 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Table(name = "users")
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id")
 public class User{
 
     @Id

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.function.BiFunction;
-import java.util.function.Function;
+import org.springframework.security.access.AccessDeniedException;
 
 @ControllerAdvice
 public class Handler {
@@ -19,6 +19,11 @@ public class Handler {
 
     @ExceptionHandler(UserNotFoundException.class)
     ResponseEntity<?> handle(UserNotFoundException e){
+        return response.apply(HttpStatus.BAD_REQUEST,e);
+    }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    ResponseEntity<?> handle(AccessDeniedException e){
         return response.apply(HttpStatus.BAD_REQUEST,e);
     }
 

@@ -19,6 +19,7 @@ public class AmazonFile {
     private String name;
 
     @ManyToOne
+
     private User user;
 
 }

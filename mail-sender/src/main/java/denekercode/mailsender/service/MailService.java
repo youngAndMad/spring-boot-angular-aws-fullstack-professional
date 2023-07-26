@@ -18,17 +18,10 @@ public class MailService {
     private final JavaMailSender javaMailSender;
 
     public void send(String link){
-        log.info("sending new request {}" , link);
-        System.out.println();
-        System.out.println();
+        log.info("sending new message {}" , link);
         var data = link.substring(link.lastIndexOf("data")+5);
         var verificationToken=link.substring(link.indexOf('=') +1, link.indexOf("data")-1);
         var linkToSend="http://localhost:4200/verification?token="+verificationToken+"&data="+data;
-        System.out.println("data "+data);
-        System.out.println();
-        System.out.println("token "+verificationToken);
-        System.out.println();
-        System.out.println("link to send"+linkToSend);
         javaMailSender.send(create.apply(getEmail.apply(link),linkToSend));
         // /verification?date=
     }
