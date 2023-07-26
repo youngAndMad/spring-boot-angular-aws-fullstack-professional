@@ -23,7 +23,6 @@ public class MailService {
         var verificationToken=link.substring(link.indexOf('=') +1, link.indexOf("data")-1);
         var linkToSend="http://localhost:4200/verification?token="+verificationToken+"&data="+data;
         javaMailSender.send(create.apply(getEmail.apply(link),linkToSend));
-        // /verification?date=
     }
 
     private final Function<String,String> getEmail = link -> link.substring("http://localhost:8080/api/v1/auth/".length() , link.indexOf('?'));
