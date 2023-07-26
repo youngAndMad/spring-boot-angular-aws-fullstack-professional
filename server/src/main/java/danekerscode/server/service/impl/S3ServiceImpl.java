@@ -4,6 +4,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
+import com.amazonaws.util.IOUtils;
 import danekerscode.server.service.AmazonFileService;
 import danekerscode.server.service.S3Service;
 import danekerscode.server.service.UserService;
@@ -46,17 +47,19 @@ public class S3ServiceImpl implements S3Service {
 
 
     @SneakyThrows
-    public Object downloadFile(String fileName) {
-        S3Object object = s3.getObject(bucketName, fileName);
-        S3ObjectInputStream s3is = object.getObjectContent();
-        FileOutputStream fileOutputStream = new FileOutputStream(fileName);
-        byte[] read_buf = new byte[1024];
-        int read_len;
-        while ((read_len = s3is.read(read_buf)) > 0) {
-            fileOutputStream.write(read_buf, 0, read_len);
+    public byte[] downloadFile(String fileName) {
+        S3Object s3Object = s3.getObject(bucketName, fileName);
+
+        S3ObjectInputStream inputStream = s3Object.getObjectContent();
+
+        try {
+            return IOUtils.toByteArray(inputStream);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+
         }
-        Path pathObject = Paths.get(fileName);
-        return new UrlResource(pathObject.toUri());
+        return new byte[] {};
     }
 
     public Boolean deleteFile(String fileName, Integer id) {

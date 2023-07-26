@@ -1,4 +1,4 @@
-package danekerscode.server;
+package danekerscode.server.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.context.annotation.Bean;
