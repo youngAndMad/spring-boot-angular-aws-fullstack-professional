@@ -38,7 +38,7 @@ create database fs
 **5. Get credentials from AWS for S3 bucket **
 
 + open `server/src/main/resources/application.yml`
-+ change `clowd.aws.credentials.secret-key` & `clowd.aws.credentials.access-key` & `clowd.aws.bucket.name` as per your Google App settings
++ change `clowd.aws.credentials.secret-key` & `clowd.aws.credentials.access-key` & `clowd.aws.bucket.name` as per your AWS S3 bucket
 
 **6. Run the app using maven**
 
@@ -46,3 +46,4 @@ create database fs
 mvn spring-boot:run
 ```
 The app will start running at <http://localhost:8080>
+Open API Docs link: <http://localhost:8080/swagger-ui/index.html>
