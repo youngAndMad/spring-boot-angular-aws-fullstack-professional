@@ -49,4 +49,5 @@ The app will start running at <http://localhost:8080>
 Open API Docs link: <http://localhost:8080/swagger-ui/index.html>
 
 Claster of email verification by verification_token
-![image](https://github.com/youngAndMad/spring-boot-angular-aws-fullstack-professional/assets/113981956/221ed814-c6aa-4901-bf6b-b9be6541d534)
+![image](https://github.com/youngAndMad/spring-boot-angular-aws-fullstack-professional/assets/113981956/9fb3a109-5bc9-4f0a-ae2f-f2bd63c4a0b9)
+
