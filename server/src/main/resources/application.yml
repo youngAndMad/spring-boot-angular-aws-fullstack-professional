@@ -6,15 +6,14 @@ jwt:
 cloud:
   aws:
     bucket:
-      name: fs-danekerscode
-      key: foo
+      name: your-bucket
     region:
       static: us-east-1
     stack:
       auto: false
     credentials:
-      access-key: AKIAUACVH7EQTQEHWFIL
-      secret-key: IsEN1PeCZvmXLh4Nf7E8HEXWnGE0M4kU7ZETRrQs
+      access-key: your-access-key
+      secret-key: your-secret-key
 spring:
   datasource:
     password: postgres
