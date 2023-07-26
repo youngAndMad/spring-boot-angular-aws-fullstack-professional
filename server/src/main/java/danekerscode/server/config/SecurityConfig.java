@@ -1,7 +1,7 @@
 package danekerscode.server.config;
 
 import danekerscode.server.jwt.JwtFilter;
-import danekerscode.server.service.CustomUserDetailsService;
+import danekerscode.server.service.impl.CustomUserDetailsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

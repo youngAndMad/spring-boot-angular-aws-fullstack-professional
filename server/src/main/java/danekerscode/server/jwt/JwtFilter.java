@@ -2,7 +2,7 @@ package danekerscode.server.jwt;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
-import danekerscode.server.service.CustomUserDetailsService;
+import danekerscode.server.service.impl.CustomUserDetailsService;
 import danekerscode.server.utils.TokenType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

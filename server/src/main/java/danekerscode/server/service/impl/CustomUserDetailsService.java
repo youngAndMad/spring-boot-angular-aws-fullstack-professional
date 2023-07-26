@@ -1,4 +1,4 @@
-package danekerscode.server.service;
+package danekerscode.server.service.impl;
 
 import danekerscode.server.repository.UserRepository;
 import danekerscode.server.utils.CustomUserDetails;
